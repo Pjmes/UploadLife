@@ -1,0 +1,2 @@
+#enable application start as soon as it is deployed
+web: npm run start
