@@ -23,16 +23,16 @@ const Post = ({ post, setCurrentId }) => {
       <div className={classes.overlay2}>
         <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}><MoreHorizIcon fontSize="default" /></Button>
       </div>
+      <div className={classes.details}>
+        <Typography variant="body2" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
+      </div>
       <Typography className={classes.title} gutterBottom variant="h5" component="h2">{post.title}</Typography>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
       </CardContent>
-      <div className={classes.details}>
-        <Typography variant="body2" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
-      </div>
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}><ThumbUpAltIcon fontSize="small" /> &nbsp; Like &nbsp; {post.likeCount} </Button>
-        <Button size="small" color="secondary" onClick={() => dispatch(deletePost(post._id))}><DeleteIcon fontSize="small" /> &nbsp; Delete</Button>
+        <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}><ThumbUpAltIcon fontSize="small" /> Like {post.likeCount} </Button>
+        <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}><DeleteIcon fontSize="small" /> Delete</Button>
       </CardActions>
     </Card>
   );
