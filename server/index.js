@@ -21,7 +21,6 @@ app.get('/', (req, res) =>{
     res.send('Get Ready To Upload Your Life');
 });
 
-
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.CONNECTION_URL, { useNewURLParser: true, useUnifiedTopology: true })
