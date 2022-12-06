@@ -14,23 +14,11 @@ export default makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'center',
   },
-  formTitle: {
-    color: '#407F7F',
-    fontFamily: 'Cursive'
-  },
-  textField: {
-    backgroundColor: '#ADD8E6'
-  },
   fileInput: {
     width: '97%',
     margin: '10px 0',
-    backgroundColor: '#EECF48'
   },
   buttonSubmit: {
-    backgroundColor: '#48C5EE',
     marginBottom: 10,
-  },
-  buttonClear: {
-    backgroundColor: '#F45124',
   },
 }));
