@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core/';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { getPost, getPostsBySearch } from '../../actions/posts';
 import useStyles from './styles';
@@ -10,7 +10,7 @@ import useStyles from './styles';
 const Post = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const history = useHistory();
   const classes = useStyles();
   const { id } = useParams();
 
@@ -26,7 +26,7 @@ const Post = () => {
 
   if (!post) return null;
 
-  const openPost = (_id) => history(`/posts/${_id}`);
+  const openPost = (_id) => history.push(`/posts/${_id}`);
 
   if (isLoading) {
     return (
