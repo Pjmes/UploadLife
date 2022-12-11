@@ -4,7 +4,7 @@ export default makeStyles({
   media: {
     height: 0,
     paddingTop: '56.25%',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
     backgroundBlendMode: 'darken',
   },
   border: {
@@ -17,7 +17,7 @@ export default makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    borderRadius: '15px',
+    borderRadius: '5px',
     height: '100%',
     position: 'relative',
   },
@@ -53,4 +53,10 @@ export default makeStyles({
     display: 'block',
     textAlign: 'initial',
   },
+  postDelete: {
+    color: '#FFA500'
+  },
+  postLike: {
+    color: '#48C5EE'
+  }
 });

@@ -11,38 +11,77 @@ export const signin = async (req, res) => {
   try {
     const oldUser = await UserModal.findOne({ email });
 
-    if (!oldUser) return res.status(404).json({ message: "No existing user by entered credentials." });
+    if (!oldUser)
+      return res
+        .status(404)
+        .json({ message: "No existing user by entered credentials." });
 
-    const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      oldUser.passwordHash
+    );
 
-    if (!isPasswordCorrect) return res.status(400).json({ message: "Invalid credentials" });
+    if (!isPasswordCorrect)
+      return res.status(400).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign({ email: oldUser.email, id: oldUser._id }, "test", { expiresIn: "1h" });
+    const token = jwt.sign(
+      { email: oldUser.email, id: oldUser._id },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
 
     res.status(200).json({ result: oldUser, token });
   } catch (err) {
-    res.status(500).json({ message: "Something is wrong on the server side sign in." });
+    res
+      .status(500)
+      .json({ message: "Something is wrong on the server side sign in." });
   }
 };
 
 export const signup = async (req, res) => {
   const { email, password, firstName, lastName } = req.body;
 
+  const isDataValid = email && password && firstName && lastName;
+
   try {
     const oldUser = await UserModal.findOne({ email });
 
-    if (oldUser) return res.status(400).json({ message: "A user already exists by those credentials." });
+    if (!isDataValid) {
+      return res.status(400).json({
+        message: "Pls all fields are required",
+      });
+    }
 
-    const hashedPassword = await bcrypt.hash(password, 12);
+    if (oldUser) {
+      return res
+        .status(400)
+        .json({ message: "A user already exists by those credentials." });
+    }
 
-    const result = await UserModal.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
+    const passwordHash = await bcrypt.hash(password, 12);
 
-    const token = jwt.sign( { email: result.email, id: result._id }, "test", { expiresIn: "1h" } );
+    const result = await UserModal.create({
+      email,
+      passwordHash,
+      name: `${firstName} ${lastName}`,
+    });
+    
+    const token = jwt.sign(
+      { email: result.email, id: result._id },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
 
     res.status(201).json({ result, token });
   } catch (error) {
-    res.status(500).json({ message: "Something is wrong on the server side sing up." });
-    
+    res
+      .status(500)
+      .json({ message: "Something is wrong on the server side signing up." });
+
     console.log(error);
   }
 };

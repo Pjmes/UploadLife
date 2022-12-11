@@ -50,11 +50,11 @@ const Post = ({ post, setCurrentId }) => {
         <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="primary" disabled={!user?.result} onClick={() => dispatch(likePost(post._id))}>
+        <Button className={classes.postLike} size="small" color="primary" disabled={!user?.result} onClick={() => dispatch(likePost(post._id))}>
           <Likes />
         </Button>
         {(user?.result?._id === post?.creator) && (
-          <Button size="small" color="secondary" onClick={() => dispatch(deletePost(post._id))}>
+          <Button className={classes.postDelete} size="small" color="secondary" onClick={() => dispatch(deletePost(post._id))}>
             <DeleteIcon fontSize="small" /> Delete
           </Button>
         )}

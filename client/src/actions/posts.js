@@ -1,12 +1,38 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
-import * as api from '../api/index.js';
+import {
+  FETCH_ALL,
+  CREATE,
+  UPDATE,
+  DELETE,
+  LIKE,
+} from "../constants/actionTypes";
+import * as api from "../api/index.js";
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (searchTag) => async (dispatch) => {
+
   try {
-    const { data } = await api.fetchPosts();
+    dispatch({
+      type: FETCH_ALL,
+      payload: {
+        status: "loading",
+      },
+    });
 
-    dispatch({ type: FETCH_ALL, payload: data });
+    const { data } = await api.fetchPosts(searchTag);
+
+    dispatch({
+      type: FETCH_ALL,
+      payload: {
+        status: "completed",
+        data,
+      },
+    });
   } catch (error) {
+    dispatch({
+      type: FETCH_ALL,
+      payload: {
+        status: "failed",
+      },
+    });
     console.log(error);
   }
 };
@@ -32,7 +58,7 @@ export const updatePost = (id, post) => async (dispatch) => {
 };
 
 export const likePost = (id) => async (dispatch) => {
-  const user = JSON.parse(localStorage.getItem('profile'));
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   try {
     const { data } = await api.likePost(id, user?.token);
