@@ -7,6 +7,8 @@ import {
 } from "../constants/actionTypes";
 import * as api from "../api/index.js";
 
+
+//process the functions of dealing with posts
 export const getPosts = (searchTag) => async (dispatch) => {
 
   try {

@@ -1,6 +1,8 @@
 import { AUTH } from '../constants/actionTypes';
 import * as api from '../api/index.js';
 
+//setup sign in and sign up actions on the auth page
+
 export const signin = (formData, router) => async (dispatch) => {
   try {
     const { data } = await api.signIn(formData);

@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import PostMessage from "../models/postMessage.js";
 
 const router = express.Router();
-
+//backend controller to retrieve all of the posts 
 export const getPosts = async (req, res) => {
   try {
     const postMessages = await PostMessage.find();
@@ -14,7 +14,7 @@ export const getPosts = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
-
+//backend controller to retrieve a single post by id
 export const getPost = async (req, res) => {
   const { id } = req.params;
 
@@ -26,7 +26,7 @@ export const getPost = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
-
+//backend controller to process the creation of a post
 export const createPost = async (req, res) => {
   const post = req.body;
 
@@ -44,7 +44,7 @@ export const createPost = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
-
+//backend controller to process the creation of a post
 export const updatePost = async (req, res) => {
   const { id } = req.params;
   const { title, message, creator, selectedFile, tags } = req.body;
@@ -58,7 +58,7 @@ export const updatePost = async (req, res) => {
 
   res.json(updatedPost);
 };
-
+//backend controller to process the deletion of a post by the user
 export const deletePost = async (req, res) => {
   const { id } = req.params;
 
@@ -69,7 +69,7 @@ export const deletePost = async (req, res) => {
 
   res.json({ message: "Card has successfully been deleted." });
 };
-
+//backend controller to process the 'like' of a post
 export const likePost = async (req, res) => {
   const { id } = req.params;
 

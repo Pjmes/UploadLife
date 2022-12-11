@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+//Need to set schema for the post
 const postSchema = mongoose.Schema({
     title: String,
     message: String,

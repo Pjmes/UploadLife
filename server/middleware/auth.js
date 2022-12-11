@@ -1,10 +1,10 @@
 import jwt from "jsonwebtoken";
 
-//const secret = 'test';
 
+//seting authentication for the web token to process the data
 const auth = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1]; //req.userId
+    const token = req.headers.authorization.split(" ")[1]; 
 
     const isCustomAuth = token?.length < 500;
 
@@ -15,11 +15,8 @@ const auth = async (req, res, next) => {
       req.userId = decodedData?.id;
     }
 
-    // if (token && isCustomAuth) {
-    //   decodedData = jwt.verify(token, 'test');
+    //FOR IF ADD GOOGLE LATER. .sub to process google auth instead of the .id
 
-    //   req.userId = decodedData?.id;
-    // }
     // } else {
     //   decodedData = jwt.decode(token);
 

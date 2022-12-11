@@ -5,7 +5,7 @@ import searchPost from "../middleware/searchPost.js"
 import auth from "../middleware/auth.js";
 const router = express.Router();
 
-
+//Set the routes for each call
 router.get('/',searchPost, getPosts);
 router.post('/',auth,  createPost);
 router.patch('/:id', auth, updatePost);
